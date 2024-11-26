@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .blue {
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1></h1>
+
+  <button id="btn">클릭</button>
+
+  <input type="text" id="text-input">
+
+  <script>
+    // 1. querySelector
+    const inputTag = document.querySelector('#text-input')
+    const h1Tag = document.querySelector('h1')
+    const btn = document.querySelector('#btn')
+
+    // 2. 콜백 함수
+    // ===== 입력창(input) 관련 기능 구현 =====
+    const inputHandler = function (event) {
+      //h1태그의 내용에 입력창에 입력한것을 할당(실시간 업데이트)
+      h1Tag.textContent = event.currentTarget.value
+    }
+    // ===== 클릭 버튼 관련 기능 구현 =====
+    const clickHandler = function () {
+      // 방법 1: add를 사용하여 h1 태그에 'blue' 클래스를 추가
+      // h1Tag.classList.add('blue') // 단점은 원래 색으로 돌아오지 않는다.
+      // 방법 2: toggle을 사용하여 'blue' 클래스를 켜고 끈다
+      h1Tag.classList.toggle('blue')
+
+      // 방법 3: if문을 사용하여 수동으로 클래스를 켜고 끈다
+      // if (h1Tag.classList.value) {
+      //   h1Tag.classList.remove('blue')
+      // } else {
+      //   h1Tag.classList.add('blue')
+      // }
+
+    }
+
+    // 3. 이벤트 리스너
+    inputTag.addEventListener('input', inputHandler)
+    btn.addEventListener('click', clickHandler)
+    
+  </script>
+</body>
+
+</html>

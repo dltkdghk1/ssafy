@@ -1,0 +1,9 @@
+nav a {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}

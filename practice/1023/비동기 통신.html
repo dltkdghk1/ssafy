@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      console.log("시작");
+
+      // 콜백함수
+      setTimeout(() => {
+        console.log("5초후에 시작");
+        // 콜백함수를 중첩 ... -> 콜백지옥(비동기작업이 중첩될 때) 발생
+        // -? promise 잘 안쓰고 async/await로 해결
+      }, 5000);
+
+      console.log("끝");
+    </script>
+  </body>
+</html>

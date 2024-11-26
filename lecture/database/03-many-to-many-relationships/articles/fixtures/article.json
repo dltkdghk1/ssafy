@@ -1,0 +1,44 @@
+[
+{
+    "model": "articles.article",
+    "pk": 2,
+    "fields": {
+        "user": 1,
+        "title": "배고파",
+        "content": "배고퍼",
+        "created_at": "2024-10-14T02:50:34.461Z",
+        "updated_at": "2024-10-14T02:50:34.461Z",
+        "like_users": [
+            2
+        ]
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "title": "집",
+        "content": "가고싶다",
+        "created_at": "2024-10-15T01:14:05.797Z",
+        "updated_at": "2024-10-15T01:14:05.797Z",
+        "like_users": [
+            2
+        ]
+    }
+},
+{
+    "model": "articles.article",
+    "pk": 5,
+    "fields": {
+        "user": 3,
+        "title": "마",
+        "content": "도란나",
+        "created_at": "2024-10-15T01:14:56.558Z",
+        "updated_at": "2024-10-15T01:14:56.558Z",
+        "like_users": [
+            3
+        ]
+    }
+}
+]

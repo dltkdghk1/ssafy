@@ -1,0 +1,80 @@
+<body>
+  <div id="app">
+    <!-- 1. 인라인 핸들러 -->
+    <!-- 버튼을 클릭할 때마다 count 1씩 증가 -->
+    <button @click="count++">1증가</button>
+    <p>count: {{ count }}</p>
+
+    <!-- 2. 메소드 핸들러 -->
+    <button @click="myFunc">Hello</button>
+
+
+    <!-- 3. 인라인 핸들러에서 메소드 호출 -->
+    <!-- 버튼 클릭 시 greeting함수를 호출, 인자로 "hello" 또는 "bye"전달 -->
+    <button @click="greeting('hello')">say hello</button>
+    <button @click="greeting('bye')">say bye</button>
+
+    <!-- 4. 이벤트 객체($event) 전달 -->
+    <!-- 버튼 클릭 시 warning함수 호출, 메세지와 이벤트 객체를 전달 -->
+    <button @click="warning('경고입니다.', $event)">Submit</button>
+
+    <!-- 5. 이벤트 수식어(modifiers) -->
+    <!-- prevent를 붙혀서 새로고침을 할 수 없어 alret만 뜬다 -->
+    <a href="https://www.google.com/" @click.prevent="onLink">Go to google</a>
+
+
+    <!-- 6. 키 수식어 -->
+    <!-- .enter : Enter 키를 눌렀을 때 함수를 호출 -->
+    <input @keyup.enter="onSubmit">
+    
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        const count = ref(0)
+
+        const name = ref('Bob')
+
+        const myFunc = function (event) {
+          console.log(event)
+          console.log(event.currentTarget) // 이벤트가 발생한 요소
+          console.log(`Hello ${name.value}!`)
+        }
+        // message를 콘솔에 출력하는 함수
+        const greeting = function (message) {
+          console.log(message)
+        }
+
+        // $event: 이벤트 핸들러 함수의 매개변수로 전달
+        const warning = function (message, event) {
+          console.log(message)
+          console.log(event)
+        }
+
+        const onLink = function () {
+          alert('Google로 이동합니다')
+        }
+
+        const onSubmit = function () {
+          console.log('onSubmit')
+        }
+        return {
+          count,
+          name,
+          myFunc,
+          greeting,
+          warning,
+          onLink,
+          onSubmit
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>

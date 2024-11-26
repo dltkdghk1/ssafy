@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <!--  1번과 차이 : createApp 함수에서 count를 증가하는 함수를 정의 -->
+  <div id="app">
+    <button @click="increment">{{ count }}</button>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp ({
+      setup() {
+        const count = ref(0)
+        const increment = function () {
+          // ref로 생성된 반응형 변수는 반드시 .value로 접근해야한다.
+          count.value++
+        }
+        return {
+          // 템플릿에서 사용할 변수와 함수 변환
+          count,
+          increment
+        }
+      }
+    })
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!-- 고양이 이미지를 가져와서 보여주는 웹 페이지 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+
+  <button>냥냥펀치</button>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+     
+    const URL = 'https://api.thecatapi.com/v1/images/search'
+
+    // 1. queryselector
+    const btn = document.querySelector('button')
+
+      
+    // 2. 콜백함수
+    const getCats = function () {
+       
+      axios({
+        method: 'get',
+        url: URL
+      })
+        // 첫번째 then : API 응답에서 이미지 URL 추출
+        .then((response) => {
+          // 0번 인덱스의 url 속성
+          const imgUrl = response.data[0].url
+          // 다음 then으로 imgUrl을 전달
+          return imgUrl
+        })
+        // 두번째 then : 이미지 URL을 받아서 실제 이미지를 페이지에 추가
+        .then((imgData) => {
+          // img 태그 생성
+          const imgElem = document.createElement('img')
+          // src 속성에 imgData 설정
+          imgElem.setAttribute('src', imgData)
+          // body태그의 자식으로 img태그를 추가
+          document.body.appendChild(imgElem)
+        })
+        // 에러 발생 시
+        .catch((error) => {
+          console.log(error)
+          console.log('실패')
+
+        })
+      console.log('야옹야옹')
+    }
+
+
+    // 3. 이벤트 리스너
+    // btn을 클릭했을 때 getCats 함수를 실행해라!!
+    btn.addEventListener('click', getCats)
+
+    // 코드 순서
+    // 버튼 클릭
+    // 서버에 고양이 이미지 요청
+    // 응답(response)에서 이미지 URL 추출
+    // 이미지 URL로 img 태그 생성
+    // 생성한 이미지 페이지에 표시
+
+    // 어느 단계에서든 에러가 발생하면 catch 블록이 실행
+
+   </script>
+</body>
+</html>

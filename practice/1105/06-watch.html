@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+<body>
+  <div id="app">
+
+  <!-- 예시 1: 숫자 카운터 -->
+  <button @click="count++">Add 1</button>
+  <p>Count: {{ count }}</p>
+
+  <!-- 예시 2: 입력값 길이 측정 -->
+  <input v-model="message">
+  <p>Message length: {{ messageLength }}</p>
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    // 1. computed(계산된 속성)
+    // : 데이터를 기반으로 새로운 데이터를 만들 때 사용
+    // : 주로 '계산'이 필요할 때 사용
+
+    // 2. watcher(감시자)
+    // : 데이터의 변경에 대응하여 '작업'을 수행할 때 사용
+    // : 주로 '반응'이 필요할 때 사용
+
+    // ex)
+    // 네이버 쇼핑 장바구니에서 물품들의 총액 -> computed
+    // 위치가 변경되면 네이버 지도 업데이트 -> watch
+    
+    const { createApp, ref, watch } = Vue
+
+    const app = createApp({
+      setup() {
+
+        const count = ref(0)        
+        const message = ref('')    
+        const messageLength = ref(0) 
+
+        // watch(감시할 대상(변수 또는 함수), 콜백함수)
+        // 콜백함수 -> 
+        // 1. newValue: 변경된 새로운 값
+        // 2. oldValue: 변경되기 전의 값
+
+        // 예시 1: count 값 감시
+        watch(count, (newValue, oldValue) => {
+          // 예) 버튼 한번 눌렀을 때
+          // 0 -> 1, newValue: 1, oldValue: 0
+          console.log(`newValue: ${newValue}, oldValue: ${oldValue}`)
+        })
+
+        // 예시 2: message 값 감시
+        watch(message, (newValue, oldValue) => {
+          messageLength.value = newValue.length
+        })
+
+        
+
+        // 컴포넌트에서 사용할 변수들 반환
+        return {
+          count,
+          message,
+          messageLength
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+</html>

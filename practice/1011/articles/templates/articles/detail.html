@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h2> DETAIL </h2>
+ 
+  <h3>{{article.pk}} 번째 게시글</h3>
+
+  <hr>
+
+  <p>제목 : {{article.title}}</p>
+  <p>내용 : {{article.content}}</p>
+  <p>작성 시각 : {{article.created_at}}</p>
+  <p>수정 시각 : {{article.updated_at}}</p>
+
+  <hr>
+
+  {% if request.user == article.user %}
+    <a href="{% url "articles:update" article.pk%}">게시글 수정</a>
+
+    <hr>
+
+    <form action="{% url "articles:delete" article.pk %}" method = "POST">
+      {% csrf_token %}
+      <input type="submit" value="DELETE">
+    </form>
+  {% endif %}
+
+  <hr>
+
+  {% if article.image %}
+    <img src="{{article.image.url}}" alt="img">
+  {% endif %}
+
+  <h4>댓글 목록</h4>
+  <ul>
+    {% for comment in comments %}
+      <li>
+        {{ comment.user }} - {{ comment.content }}
+        {% if request.user == comment.user %}
+        {% comment %} 현재 로그인한 유저와 댓글을 단 유저가 같을 때 삭제 버튼이 활성화 {% endcomment %}
+          <form action="{% url "articles:comments_delete" article.pk comment.pk %}" method='POST' >
+            {% csrf_token %}
+            <input type="submit" value='삭제'>
+          </form>
+        {% endif %}
+      </li> 
+    {% endfor %}
+  </ul>
+
+  <hr>
+
+  <h4>댓글 생성</h4>
+
+  <form action="{% url "articles:comments_create" article.pk %}" method='POST'>
+    {% csrf_token %}
+    {{ comment_form }}
+    <input type="submit">
+  </form>
+
+  <a href="{% url "articles:index" %}">Home</a>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% comment %}
+  method = 'GET'
+  1. GET방식, 2. POST 방식 
+  4차이점 : GET방식은 url에 데이터가 노출, POST방식은 URL에 데이터 노출 x
+  보안성은 POST방식이 더 좋지만 GET방식을 쓰는 이유 ?? : GET방식이 훨씬 간단하다 
+  {% endcomment %}
+
+  {% comment %} action = "요청보낼 url (서버의 주소)" {% endcomment %}
+  {% comment %} ? 기준으로 왼쪽은 url 오른쪽 query string parameter {% endcomment %}
+  <form action="https://search.naver.com/search.naver" methode='GET'>
+    <label for="message">검색어를 입력하세요</label>
+    {% comment %} 우리가 input으로 입력한 text는 value {% endcomment %}
+    {% comment %} key는 무엇으로 할 것인가 ??? {% endcomment %}
+    {% comment %} text -> value, name -> key {% endcomment %}
+    <input type="text" name='query'>
+    <input type="submit">
+  </form>
+{% endblock content %}

@@ -1,0 +1,58 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Document</title>
+</head>
+
+<body>
+
+ <h1>로또 추천 번호</h1>
+
+ <button id="btn">행운 번호 받기</button>
+
+ <div></div>
+
+  <!-- CDN : Lodash 라이브러리 가져오기-->
+  <!-- 1. 라이브러리 설치 npm명령어 : node.js 설치 -->
+  <!-- 2. CDN : 공식문서 -->
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+ 
+  <script>
+  //1. querySelector
+    const h1Tag = document.querySelector('h1')   
+    const btn = document.querySelector('#btn')     
+    const divTag = document.querySelector('div')     
+
+    // 2. 콜백함수
+    // 로또 번호를 생성하고 화면에 표시하는 함수
+    // 1. 1부터 45까지 숫자 배열 ---> range
+    // 2. 6개의 숫자 무작위로 뽑기 ---> sampleSize
+    const getLottery = function (event) {
+      // _ : Lodash 의미
+      const numbers = _.range(1, 46)
+      const sixNumbers = _.sampleSize(numbers, 6)
+      // ul, li:6개 ---> createElement
+      const ulTag = document.createElement('ul')
+      // 6개의 숫자 순회(for X, forEach O)
+      sixNumbers.forEach((number) => {
+        const liTag = document.createElement('li')
+        liTag.textContent = number
+        // ul태그의 자식태그가 li태그
+        ulTag.appendChild(liTag)
+      })
+      //div태그의 자식태그로 ul태그
+      divTag.appendChild(ulTag)
+   }
+
+  //3. 이벤트 리스너
+  // 버튼을 클릭하면 getLottery 함수가 실행
+  btn.addEventListener('click', getLottery)
+  </script>
+</body>
+
+</html>

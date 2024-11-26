@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <!-- async/await 장점 -->
+   <!-- 동기 코드처럼 읽혀져서 더 직관적이고 가독성이 좋다. -->
+   <!-- 에러처러가 더 깔끔(try-catch) -->
+   <!-- 디버깅이 더 쉬움(추적이 쉽다) -->
+
+
+   <!-- 고양이 이미지를 가져오는 버튼 -->
+   <button>냥냥펀치</button>
+
+   <!-- Axios 라이브러리 추가 -->
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <script>
+       // 고양이 API의 주소를 변수에 저장
+       const URL = 'https://api.thecatapi.com/v1/images/search'
+       // 1. querySelector
+       const btn = document.querySelector('button')
+       // 2. 콜백함수
+       const getCats = async function() {
+         try{
+            // 고양이 이미지 요청 ---> 응답
+            const response = await axios.get(URL)
+            // 이미지 URL 추출
+            const imgUrl = response.data[0].url
+            // 이미지 태그 생성, 페이지에 추가
+            const imgElem = document.createElement('img')
+            imgElem.setAttribute('src', imgUrl)
+            document.body.appendChild(imgElem)
+         }
+         catch (error) {
+            console.log(error)
+         }
+
+       }
+       
+      //3. 이벤트 리스너
+      btn.addEventListener('click', getCats)
+
+
+   </script>
+</body>
+</html>

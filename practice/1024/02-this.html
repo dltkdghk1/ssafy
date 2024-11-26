@@ -1,0 +1,98 @@
+<!-- this-keyword.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Method & this 예시
+    const person = {
+      name: 'Alice',
+      greeting: function () { // 메서드 정의
+        return `Hello my name is ${this.name}` // this는 person을 가리킴
+      },
+    }
+    // 메서드 호출 : 객체.메서드()
+    console.log(person.greeting()) 
+
+    // 단순호출과 메서드호출을 나눈 이유
+    // this는 함수를 "어떻게 호출하느냐"에 따라 실행 시점이 다르다
+    // 동적 할당 <--> python의 클래스의 self와의 차이점 
+
+    // 1.1 단순 호출
+    // window객체와 document객체의 차이
+    // window객체 안에 document객체를 포함 -> window.document
+    // document객체는 웹페이지의 HTML을 담고 있는 객체
+    const myFunc = function () {
+      return this // 여기서 this는 브라우저의 전역 객체(최상위 객체)
+                  // window
+    }
+    console.log(myFunc())
+
+    // 1.2 메서드 호출
+    const myObj = {
+      data: 1,
+      myFunc () {
+        return this // 여기서 this는 myObj
+      }
+    }
+    console.log(myObj.myFunc())
+
+    // 2. 중첩된 함수
+    // 2.1 일반 함수
+    const myObj2 = {
+      numbers: [1, 2, 3],
+      myFunc () {
+        // this -> myObj2
+        // numbers.foreach -> 1, 2, 3 (3번 반복)
+        this.numbers.forEach(function (number) {
+          console.log(this) // 문제점 ! 중첩 함수에서의 this -> window를 가리킴
+        })
+      }
+    }
+    // 메서드 호출
+    myObj2.myFunc() // window window window
+
+
+    // 2.2 화살표 함수
+    // 중첩 함수에서의 this의 문제점 때문에 사용하는게 화살표 함수
+    // 중첩된 함수가 화살표 함수일 경우 부모 함수의 this를 가져온다.
+    const myObj3 = {
+      numbers: [1, 2, 3],
+      myFunc () {
+        // this는 myObj3를 가르킴
+        // numbers.foreach -> 1, 2, 3 (3번 반복)
+        this.numbers.forEach((number) => {
+          console.log(this) // 여기서의 this는 부모함수의 this
+        })
+      }
+    }
+    // 메서드 호출
+    myObj3.myFunc()
+
+    // 함수 -> 화살표 함수
+    // for -> forEtch
+    // 왜 js는 축약하는거 좋아할까 ? -> 콜백함수 때문에
+
+    // numbers = [1, 2, 3]
+    // for number in numbers:
+
+    const myObj4 = {
+      numbers : [1, 2, 3],
+      myFunc() {
+        this.numbers.forEach((number) => {
+          console.log(this)
+        })
+      }
+    }
+    myObj4.myFunc()
+  </script>
+</body>
+
+</html>

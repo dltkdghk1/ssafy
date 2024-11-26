@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Edit</h1>
+  {% comment %} variable routing -> article.pk {% endcomment %}
+  <form action="{% url "articles:update" article.pk %}" method='POST'>
+    {% csrf_token %}
+    <label for="title"> Title : </label>
+    <input type="text" name='title' id='title' value='{{article.title}}'>
+  </div>
+
+  <div>
+    <label for="content">Content : </label>
+    <textarea name="content" id="content" cols='30' rows='10'>{{article.content}}</textarea>
+  </div>
+  <input type="submit">
+</form>
+
+{% comment %} 취소 버튼 {% endcomment %}
+<a href="{% url "articles:detail" article.pk %}">back</a>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Create</h1>
+  {% comment %} enctype='multipart/form-data -> 폼 데이터와 함께 파일을 서버에 전송할 수 있다. {% endcomment %}
+  <form action="{% url "articles:create"%}" method='POST' enctype='multipart/form-data'>
+    {% csrf_token %}
+    {% comment %} 
+    form.as_table, form.as_ul, form_div, form.as_p 4종류 있음 
+    {% endcomment %}
+    {{ form.as_p }}
+    <input type="submit">
+  </form>
+{% endblock content %}

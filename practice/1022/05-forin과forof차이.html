@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // for...in
+    // 1. 배열, 0 1 2 출력
+    const arr = ['a', 'b', 'c']
+
+    for (const elem in arr) {
+      console.log(elem)
+    }
+
+    // 2. 객체, korea japan china 출력
+    const capitals = {
+      japan: '도쿄',
+      korea: '서울',
+      china: '베이징',
+    }
+
+    for (const capital in capitals) {
+      console.log(capital)
+    }
+    // for...of
+    // 3. 배열, a b c 출력
+
+    for (const elem of arr) {
+      console.log(elem)
+    }
+
+    
+    // 4. 객체, 서울 도쿄 베이징 출력 ---> for ... in으로
+    // 객체는 iterable이 아니기 때문애  for of 이용해서 값 출력 x
+
+    for (const property in capitals) {
+      console.log(capitals[property])
+    }
+
+    const obj = {
+      2 : 'b',
+      1 : 'a',
+      c : '3',
+      b : '2',
+      a : '1',
+    }
+
+    for (const key in obj) {
+      console.log(key)
+      // 숫자는 작은 숫자, 문자는 삽입 순서대로
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- var, let, const
+    let : 재할당 가능
+    const : 재할당 불가능 
+    const는 재선언 불가능, 재할당 불가능하기 때문에 
+    변수 추적이 용이하여 변수 선언에는 주로 const를 주로 사용-->
+
+    <!-- 카멜케이스
+    변수명이나 함수명을 지을 때 단어와 단어를 연결,
+    첫 글자를 대문자로 (단, 맨 첫 단어의 첫 글자는 소문자로)(ex. firstName) -->
+
+    <!-- DOM : 웹 페이지를 객체로서 제공 -->
+    <script>
+      let firstNumber = 10;
+      // 재선언
+      // let firstName = 20
+      // 재할당
+      firstNumber = 20;
+      console.log(firstNumber);
+
+      const secondNumber = 10;
+      // secondNumber = 20 -> const는 재할당 불가능
+      console.log(secondNumber);
+
+      var a = 10;
+      a = 10; // defalt 값은 var
+      console.log(a);
+    </script>
+  </body>
+</html>

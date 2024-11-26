@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+  <!-- {{}}를 콧수염 괄호라고 함 -->
+    <h1>{{ message }}</h1>
+    <!-- v-on:click : 클릭 이벤트 감지 -->
+    <button @click="count++">
+      count is: {{ count }}
+    </button>
+  </div>
+ 
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    // Vue에 필요한 함수들을 구조분해할당으로 가져옴
+    // createApp : vue앱 생성
+    // ref : 반응형 변수 생성
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        // ref 반응형 변수로 message를 생성, 초기값이 'Hello vue !!'
+        const message = ref('Hello vue !!')
+        const count = ref(0)
+
+        // setup함수에서 사용할 변수를 반환
+        return {
+          message,
+          count
+        }
+      }
+    })
+    // vue에서 앱을 생성 -> div태그의 #app과 연결(마운트)
+    app.mount('#app')
+  </script>
+
+</body>
+
+</html>

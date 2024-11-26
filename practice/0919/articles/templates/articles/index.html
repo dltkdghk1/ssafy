@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% comment %} 템플릿 상속 {% endcomment %}
+
+{% block content %}
+{% comment %} DTL 변수 출력 {% endcomment %}
+  <h1>Hello, {{ name }}</h1>
+  {% comment %} naming url 패턴 -> name = dinner
+  {% url "articles:dinner" %}
+  {% url app_name:naming url패턴 %} {% endcomment %}
+  <a href="{% url "articles:dinner" %}">dinner</a>
+  <a href="{% url "articles:search" %}">search</a>
+  <a href="{% url "articles:throw" %}">throw</a>
+  <a href="{% url "articles:detail" number %}">detail</a>
+{% endblock content %}

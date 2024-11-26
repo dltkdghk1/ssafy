@@ -1,0 +1,17 @@
+[
+{
+    "model": "articles.article",
+    "pk": 1,
+    "fields": {
+        "user": 1,
+        "title": "첫 번째 게시글",
+        "content": "우아아아아아",
+        "image": "",
+        "created_at": "2024-10-11T05:22:56.866Z",
+        "updated_at": "2024-10-11T05:22:56.866Z",
+        "like_users": [
+            1
+        ]
+    }
+}
+]

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    
+    // 콜백함수란? 함수의 인자로 들어가는 함수
+
+   
+    // 1
+    // 함수 표현식을 forEach의 인자로 전달
+    const number1 = [1, 2, 3]
+    number1.forEach(function (num) {
+      console.log(num ** 2)
+    })
+
+    // 1번 방식을 화살표 함수로
+    number1.forEach((num) => {
+      console.log(num ** 2)
+    })
+
+    // 2
+    const number2 = [1, 2, 3]
+    const callBackFunc = function (num) {
+      console.log(num ** 2)
+    }
+    number2.forEach(callBackFunc)
+
+    // 2번 방식을 화살표 함수로
+    // 2번 방식은 언제 쓸까? this 중첩 호출
+    const number3 = [1, 2, 3]
+    const callBackFunc1 = (num) => {
+      console.log(num ** 2)
+    }
+    number3.forEach(callBackFunc1)
+
+
+  </script>
+</body>
+
+</html>

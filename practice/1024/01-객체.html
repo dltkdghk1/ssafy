@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const user = {
+      name: 'Alice',
+      'key with space': true,
+      greeting: function () { // 메서드 정의 -> 메서드 호출 : 객체.메서드()
+        return 'hello'
+      }
+    }
+
+    // 객체를 조회하는 두가지 방법
+    // 1. 객체.속성(속성이 문자) -> user.name, user.key with space
+    console.log(user.name)
+    // 만약 속성이 2. 특수문자포함 3. 숫자로시작 -> 객체['속성']
+    console.log(user['key with space'])
+
+
+    // 추가
+    user.adress = 'korea'
+    console.log(user.name)
+
+
+    // 수정
+    user.name = 'Bob'
+    console.log(user.name)
+
+    // 삭제
+    delete user.name
+    console.log(user.name)
+
+
+    // in 연산자
+    console.log('greeting' in user)
+    console.log('country' in user)
+
+
+    // 메서드 호출
+    console.log(user.greeting())
+
+
+    const user2 = {
+      name : '철수',
+      greeting() {
+        return '안녕하세요' + this.name + '님' // 여기서 this는 user2를 가르킨다.
+      }
+    }
+
+    //this 키워드를 사용
+    console.log(user2.greeting())
+
+
+  </script>
+</body>
+
+</html>

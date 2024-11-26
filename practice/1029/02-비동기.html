@@ -1,0 +1,46 @@
+<!-- asynchrounous.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    console.log('작업 1 시작')
+    
+    const asyncTask = function (callBack) {
+      setTimeout(() => {
+        callBack('작업 완료')
+      }, 5000)
+    }
+    
+    asyncTask((result) => {
+      console.log(result)
+    })
+
+    console.log('작업 2 시작')
+    
+    // 1. console.log('작업 1 시작')가 먼저 실행
+    // CallStack에 들어가서 즉시 실행 '작업 1시작' 출력
+    
+    // 2. setTimeout이 호출
+    // WebAPI로 전달, 5초동안 기다림
+
+    // 3. console.log('작업 2 시작') 실행
+    // '작업 2 시작' 출력
+
+    // 4. WebAPI에서 타이머 완료
+    // 콜백함수가 Task Queue로 이동
+    // EventLoop가 Call Stack이 비어있는걸 확인
+    // Task Queue에서 대기중인 콜백함수를 Call Stack으로 가져오기
+    // 마지막으로 console.log('작업완료') 실행
+
+  </script>
+</body>
+
+</html>

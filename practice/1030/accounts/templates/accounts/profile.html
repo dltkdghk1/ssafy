@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  {% comment %} 
+  첫 번째 : person.pk 어떻게 보낼까 ?
+  두 번째 : csrf_token 어떻게 보낼까 
+  -> 이 두가지 고려 
+  {% endcomment %}
+
+  <h1>{{ person.username }}의 프로필</h1>
+  <div>
+    {% comment %} 새로 고침 없이 숫자만 바뀌게 -> span태그 해줬다 {% endcomment %}
+    {% comment %} span태그의 내용(textContnet)을 바꿔줘야 돼서 querySelector {% endcomment %}
+    팔로잉 : <span id="followings-count">{{ person.followings.all|length }}</span>
+    / 팔로워 : <span id="followers-count">{{ person.followers.all|length }}</span>
+  </div>
+
+  {% if request.user != person %}
+    <div>
+      {% comment %} data- : 사용자 정의 데디터 속성{% endcomment %}
+      <form id="follow-form" data-user-id="{{ person.pk }}">
+        {% csrf_token %}
+        {% if request.user in person.followers.all %}
+          <input type="submit" value="언팔로우" id="follow-input">
+        {% else %}
+          <input type="submit" value="팔로우" id="follow-input">
+        {% endif %}
+      </form>
+    </div>
+  {% endif %}
+
+  {% comment %} 유저가 작성한 게시글 {% endcomment %}
+  <h2>{{ person.username }} 작성한 게시글</h2>
+  {% for article in person.article_set.all %}
+    <p>{{ article }}</p>
+  {% endfor %}
+
+  <hr>
+
+  {% comment %} 유저가 작성한 댓글 {% endcomment %}
+  <h2>{{ person.username }} 작성한 댓글</h2>
+  {% for comment in person.comment_set.all %}
+    <p>{{ comment }}</p>
+  {% endfor %}
+
+  <hr>
+
+  {% comment %} 유저가 좋아요한 게시글 {% endcomment %}
+  <h2>{{ person.username }} 좋아요한 게시글</h2>
+  {% for article in person.like_articles.all %}
+    <p>{{ article }}</p>
+  {% endfor %}
+
+  <a href="{% url "articles:index" %}">[back]</a>
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    // 1. querySelector
+    const formTag = document.querySelector('#follow-form')
+
+    // csrftoken -> django 공식문서
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+    // 2. 콜백 함수
+    const handleFollow = async function(event) {
+      // submit할 때 새로고침 되지 않게
+      event.preventDefault()
+      // console.log(event)
+      const userId = event.currentTarget.dataset.userId
+      // const userId = formTag.dataset.userId와 같음
+      try{
+        const response = await axios({
+          method: 'post',
+          // data-user-id -> -생략되고 i가 카멜케이스로 대문자로 변경돼서 userId가 됨
+          url: `/accounts/${userId}/follow/`,
+          headers: {'X-CSRFToken': csrftoken}, // 공식문서
+        })
+        // view함수의 follow함수 -> JSON으로 응답
+        // console.log(response)
+        const isFollowed = response.data.is_followed
+        const followBtn = document.querySelector('#follow-input')
+        if (isFollowed === true) {
+          followBtn.value = 'Unfollow'
+        } else {
+          followBtn.value = 'Follow'
+        }
+        const followingsCountTag = document.querySelector('#followings-count')
+        const followersCountTag = document.querySelector('#followers-count')
+        followingsCountTag.textContent = response.data.followings_count
+        followersCountTag.textContent = response.data.followers_count
+      }
+      catch (error) {
+        console.log(error)
+      }
+    }
+
+    // 3. 이벤트 리스너
+    formTag.addEventListener('submit', handleFollow)
+  </script>
+</body>
+</html>

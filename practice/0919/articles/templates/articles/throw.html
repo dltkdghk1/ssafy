@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Throw</h1>
+  {% comment %} naming url 패턴
+  {% url app_name(namespace): url naming 패턴 %} {% endcomment %}
+  <form action="{% url 'articles:catch' %}" method="GET">
+    {% comment %} message는 views.py의 catch 함수의 message {% endcomment %}
+    {% comment %} name을 바꾸면 1. url이 바뀌고, 2. request가 바뀐다. {% endcomment %}
+    <input type="text" name="message">
+    <input type="submit">
+  </form>
+{% endblock content %}

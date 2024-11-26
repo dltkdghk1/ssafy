@@ -1,0 +1,41 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="text-input">
+
+  <p></p>
+
+  <script>
+    // 1. querySelector
+    const inputTag = document.querySelector('#text-input')
+    const pTag = document.querySelector('p')
+
+    // 2. 콜백함수
+    const inputHandler = function (event) {
+
+
+      // event.currentTarget.value
+      console.log(event.currentTarget.value)
+      
+      // pTag의 내용이 입력한 값으로 할당
+      // 실시간으로 업데이트
+      pTag.textContent = event.currentTarget.value
+
+
+    }
+    // 3. 이벤트 리스너
+    // inputTag에 input할때마다 inputHandler함수가 호출
+    inputTag.addEventListener('input', inputHandler)
+
+  </script>
+</body>
+
+</html>

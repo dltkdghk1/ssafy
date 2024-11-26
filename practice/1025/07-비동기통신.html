@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 비동기적 측면
+    console.log('1')
+
+    setTimeout(() => {
+      console.log('2')
+    }, 5000)
+
+    console.log('3')
+    
+    // 병렬 구조, 두 번째 코드가 진행 시작됨과 동시에 세 번째 코드가 진행
+
+    // 출력 결과
+    // a
+    // c
+    // b
+  </script>
+</body>
+
+</html>

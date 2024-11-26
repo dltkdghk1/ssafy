@@ -1,0 +1,68 @@
+<head>
+  <style>
+    .active {
+      color: crimson;
+    }
+
+    .text-primary {
+      color: blue;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!--
+    첫 번째 객체 구문 -> :class="{클래스명:조건}"
+
+    두 번째 배열 구문 -> :class="[클래스변수1, 클래스변수2]"
+    배열에 있는 모든 클래스가 적용
+
+    첫 번째와 두 번째를 혼합해서 사용할 수도 있다.
+    -->
+    <!-- 1. 객체 형태 클래스 바인딩 -->
+    <div :class="{active: isActive}">Text</div>
+
+    <!-- 2. 정적 클래스와 동적 클래스 함께 사용 -->
+    <div class="static" :class="{active: isActive, 'text-primary': hasInfo}">Text</div>
+
+    <!-- 3. 클래스 객체를 통째로 바인딩 -->
+    <div class="static" :class="classObj">Text</div>
+
+    <!-- 4. 배열 형태로 클래스 바인딩 -->
+    <div :class="[activeClass, infoClass]">Text</div>
+
+    <!-- 5. 배열과 객체 형태를 혼합해서 사용 -->
+    <div :class="[{active: isActive}, infoClass]"></div>
+    
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+        const isActive = ref(false) // active클래스에 적용
+        const hasInfo = ref(true) // text-primary 클래스에 적용
+
+        // 클래스 객체를 반응형으로 정의
+        const classObj = ref({ active: isActive, 'text-primary': hasInfo })
+
+        // 클래스명을 반응형 변수
+        const activeClass = ref('active')
+        const infoClass = ref('text-primary')
+        return {
+          isActive,
+          hasInfo,
+          classObj,
+          activeClass,
+          infoClass
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>

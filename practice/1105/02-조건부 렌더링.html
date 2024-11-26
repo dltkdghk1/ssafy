@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- v-if와 v-else를 사용한 조건부 렌더링 -->
+    <!-- v-if는 false일 때 요소(태그)가 DOM에서 완전히 제거 -->
+    <p v-if="isSeen">true일 때 보인다.</p>
+    <p v-else>false일 때 보인다.</p>
+
+
+    <!-- 토글 버튼 -->
+    <!-- 토글버튼 : 클릭할 때마다 값을 반대로 변경 -->
+    <!-- true는 false로 ... false는 true로 !! -->
+    <button @click="isSeen = !isSeen">true</button>
+
+
+    <!-- v-show -->
+    <!-- v-if와 v-show의 차이 -->
+    <!-- v-show는 DOM에서 제거되지 않고 display:none으로 숨김 -->
+    <div v-show="isShow">v-show</div>
+
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    const app = createApp({
+      setup() {
+
+        const isSeen = ref(false) 
+        const name = ref('Cathy')  
+        const isShow = ref(false)  
+
+        
+        return {
+          isSeen,
+          name,
+          isShow
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+</html>
